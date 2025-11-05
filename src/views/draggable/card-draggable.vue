@@ -10,10 +10,10 @@
         @start="drag = true"
         @end="drag = false"
         item-key="id"
-        tag="ul"
+        class="card-list"
       >
         <template #item="{ element }">
-          <li class="card-item">
+          <div class="card-item">
             <SvgIcon
               prefix="iconfont"
               :name="element.icon"
@@ -21,7 +21,7 @@
               :style="{ color: element.color }"
             />
             <div class="label">{{ element.label }}</div>
-          </li>
+          </div>
         </template>
       </draggable>
     </n-card>
@@ -97,7 +97,7 @@
 </script>
 
 <style lang="scss" scoped>
-  ul {
+  .card-list {
     list-style: none;
     padding: 0;
     border-top: 1px solid #f5f5f5;

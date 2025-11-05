@@ -27,7 +27,7 @@ export default () => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "./src/styles/variables.scss" as *;',
+          additionalData: `@use "${path.resolve(process.cwd(), 'src/styles/variables.scss').replace(/\\/g, '/')}" as *;`,
         },
       },
     },
