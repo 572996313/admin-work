@@ -77,7 +77,7 @@ export const adminRoutes = [
       },
       {
         parentPath: '/list',
-        menuUrl: '/list/list',
+        menuUrl: '/list/common',
         menuName: '普通列表',
       },
       {
@@ -348,7 +348,7 @@ export const editorRoutes = [
       },
       {
         parentPath: '/list',
-        menuUrl: '/list/list',
+        menuUrl: '/list/common',
         menuName: '普通列表',
       },
       {

@@ -13,7 +13,9 @@ function vawBoot() {
   useAppRouter(app)
   useGlobalComponents(app)
   useRouterGuard()
-  useMock()
+  if (import.meta.env.DEV) {
+    useMock()
+  }
   app.mount('#app')
 }
 
