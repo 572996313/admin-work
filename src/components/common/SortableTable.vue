@@ -11,29 +11,25 @@
         </n-checkbox>
         <n-button type="text" class="text-right"> 重置 </n-button>
       </div>
-      <draggable
-        :list="innerTableProps"
-        animation="500"
+      <VueDraggable
+        v-model="innerTableProps"
+        :animation="500"
         tag="transition-group"
-        item-key="key"
         @end="onUpdateValue"
       >
-        <template #item="{ element }">
-          <div class="flex pt-2 pb-2">
-            <n-checkbox
-              v-model:checked="element.checked"
-              :label="element.prop"
-              @update:checked="onChange"
-            >
-              {{ element.title }}
-            </n-checkbox>
-            <div class="flex-1"></div>
-            <n-icon>
-              <MenuIcon />
-            </n-icon>
-          </div>
-        </template>
-      </draggable>
+        <div v-for="element in innerTableProps" :key="element.key" class="flex pt-2 pb-2">
+          <n-checkbox
+            v-model:checked="element.checked"
+            @update:checked="onChange"
+          >
+            {{ element.title }}
+          </n-checkbox>
+          <div class="flex-1"></div>
+          <n-icon>
+            <MenuIcon />
+          </n-icon>
+        </div>
+      </VueDraggable>
     </template>
     <template #trigger>
       <n-button type="success" size="small" circle>
@@ -50,12 +46,12 @@
 <script lang="ts">
   import { TablePropsType } from '@/types/components'
   import { defineComponent, PropType, reactive, ref, toRef } from 'vue'
-  import draggable from 'vuedraggable'
+  import { VueDraggable } from 'vue-draggable-plus'
   import { SettingsOutline as SettingsIcon } from '@vicons/ionicons5'
   import { Menu as MenuIcon } from '@vicons/ionicons5'
   export default defineComponent({
     name: 'SortableTable',
-    components: { draggable, SettingsIcon, MenuIcon },
+    components: { VueDraggable, SettingsIcon, MenuIcon },
     props: {
       columns: {
         type: Array as PropType<TablePropsType[]>,

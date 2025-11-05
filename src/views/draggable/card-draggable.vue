@@ -4,33 +4,30 @@
       <template #header-extra>
         <n-button size="small" type="primary" @click="resetElements">重置元素位置</n-button>
       </template>
-      <draggable
-        :list="list"
-        animation="500"
+      <VueDraggable
+        v-model="list"
+        :animation="500"
         @start="drag = true"
         @end="drag = false"
-        item-key="id"
         class="card-list"
       >
-        <template #item="{ element }">
-          <div class="card-item">
-            <SvgIcon
-              prefix="iconfont"
-              :name="element.icon"
-              style="font-size: 30px"
-              :style="{ color: element.color }"
-            />
-            <div class="label">{{ element.label }}</div>
-          </div>
-        </template>
-      </draggable>
+        <div v-for="element in list" :key="element.id" class="card-item">
+          <SvgIcon
+            prefix="iconfont"
+            :name="element.icon"
+            style="font-size: 30px"
+            :style="{ color: element.color }"
+          />
+          <div class="label">{{ element.label }}</div>
+        </div>
+      </VueDraggable>
     </n-card>
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent, onMounted, reactive } from 'vue'
-  import draggable from 'vuedraggable'
+  import { VueDraggable } from 'vue-draggable-plus'
   import Iconfonts from '@/icons/iconfont/iconfont.json'
   interface IconItemType {
     label: string
@@ -40,7 +37,7 @@
   }
   export default defineComponent({
     name: 'CardDraggable',
-    components: { draggable },
+    components: { VueDraggable },
     setup() {
       const iconList = Iconfonts.glyphs.slice(0, 100)
       const list: Array<IconItemType> = reactive([])
